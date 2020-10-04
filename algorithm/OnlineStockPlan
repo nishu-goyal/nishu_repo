@@ -1,0 +1,33 @@
+class StockSpanner {
+     Stack<Integer> stk;
+    ArrayList<Integer> lst;
+
+    public StockSpanner() {
+        stk=new Stack<>();
+        lst=new ArrayList<>();
+    }
+    
+    public int next(int price) {
+        if(stk.isEmpty()){
+            stk.push(0);
+            lst.add(price);
+            return 1;
+        }
+  
+        while(!stk.isEmpty()){
+            int l=lst.get(stk.peek());
+            if(l>price){
+               break;
+            }
+             stk.pop();
+        }
+        int top;
+        if(stk.isEmpty()) top=-1;
+        else top=stk.peek();   
+        stk.push(lst.size());
+            
+        lst.add(price);
+        return stk.peek()-top;
+       
+    }
+}
